@@ -108,14 +108,14 @@ namespace LLMCommService.Services
 
             string endpoint = intent switch
             {
-                "MakePayment" => "/api/v1/bills/pay",
-                "QueryBill" => "/api/v1/bills",
-                "QueryBillDetailed" => "/api/v1/bills/detailed?page=1&pageSize=10",
+                "MakePayment" => "/mobile-billing-service/pay",
+                "QueryBill" => "/mobile-billing-service/bills",
+                "QueryBillDetailed" => "/mobile-billing-service/bills/detailed?page=1&pageSize=10",
                 _ => throw new InvalidOperationException($"Unknown intent: {intent}")
             };
 
             using var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://alpy-mobile-billing-api.azurewebsites.net");
+            httpClient.BaseAddress = new Uri("https://alpys-gateway.azurewebsites.net/");
 
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["JWTToken"]);
 
